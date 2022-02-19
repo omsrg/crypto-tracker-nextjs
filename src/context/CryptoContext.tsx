@@ -1,16 +1,15 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { ContextType, CurrencyType, SymbolType } from '@/types/types';
 
-type CurrencyType = 'IDR' | 'USD';
-type SymbolType = 'Rp' | '$';
+const CryptoContext = createContext<ContextType>({
+	currency: 'IDR',
+	symbol: 'Rp',
+	changeCurrency: () => {},
+});
 
-type ContextType = {
-	currency: CurrencyType;
-	symbol: SymbolType;
-	// setCurrency: React.Dispatch<React.SetStateAction<CurrencyType>>;
-	changeCurrency: (curr: CurrencyType) => void;
+export const CryptoState = () => {
+	return useContext(CryptoContext);
 };
-
-export const CryptoContext = createContext<ContextType | undefined>(undefined);
 
 export const CryptoContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [currency, setCurrency] = useState<CurrencyType>('IDR');
@@ -32,6 +31,7 @@ export const CryptoContextProvider = ({ children }: { children: React.ReactNode 
 	);
 };
 
-export const CryptoState = () => {
-	return useContext(CryptoContext);
-};
+// export const useCurrency = () => {
+// 	const { currency } = useContext(CryptoContext);
+// 	return currency;
+// };

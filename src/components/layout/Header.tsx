@@ -1,16 +1,8 @@
 import Link from 'next/link';
 import { makeStyles } from '@mui/styles';
-import {
-	AppBar,
-	Container,
-	Toolbar,
-	Typography,
-	Select,
-	MenuItem,
-	createTheme,
-	ThemeProvider,
-} from '@mui/material';
+import { AppBar, Container, Toolbar, Typography, Select, MenuItem } from '@mui/material';
 import { CryptoState } from '@/context/CryptoContext';
+import { CurrencyType } from '@/types/types';
 
 const useStyles = makeStyles(() => ({
 	title: {
@@ -22,55 +14,54 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-import { useContext } from 'react';
-// import { CryptoContext } from '@/context/CryptoContext';
-
 const Header = () => {
 	const classes = useStyles();
 
-	const ctx = CryptoState();
+	const { currency, changeCurrency } = CryptoState();
 
-	const { currency, changeCurrency } = ctx;
+	const onChangeCurrency = (curr: CurrencyType) => {
+		changeCurrency(curr);
+	};
 
 	console.log(currency);
 
-	const darkTheme = createTheme({
-		palette: {
-			primary: {
-				main: '#fff',
-			},
-			mode: 'dark',
-		},
-	});
+	// const darkTheme = createTheme({
+	// 	palette: {
+	// 		primary: {
+	// 			main: '#fff',
+	// 		},
+	// 		mode: 'dark',
+	// 	},
+	// });
 
 	return (
-		<ThemeProvider theme={darkTheme}>
-			<AppBar color='transparent' position='static'>
-				<Container>
-					<Toolbar>
-						<Link href='/'>
-							<a>
-								<Typography className={classes.title}>Crypto Hunter</Typography>
-							</a>
-						</Link>
+		// <ThemeProvider theme={darkTheme}>
+		<AppBar color='transparent' position='static'>
+			<Container>
+				<Toolbar>
+					<Link href='/'>
+						<a>
+							<Typography className={classes.title}>Crypto Hunter</Typography>
+						</a>
+					</Link>
 
-						<Select
-							variant='outlined'
-							style={{
-								width: 100,
-								height: 40,
-								marginRight: 15,
-							}}
-							value={currency}
-							onChange={(e) => changeCurrency(e.target.value)}
-						>
-							<MenuItem value={'USD'}>USD</MenuItem>
-							<MenuItem value={'IDR'}>IDR</MenuItem>
-						</Select>
-					</Toolbar>
-				</Container>
-			</AppBar>
-		</ThemeProvider>
+					<Select
+						variant='outlined'
+						style={{
+							width: 100,
+							height: 40,
+							marginRight: 15,
+						}}
+						value={currency}
+						onChange={(e) => onChangeCurrency(e.target.value)}
+					>
+						<MenuItem value={'USD'}>USD</MenuItem>
+						<MenuItem value={'IDR'}>IDR</MenuItem>
+					</Select>
+				</Toolbar>
+			</Container>
+		</AppBar>
+		// </ThemeProvider>
 	);
 };
 

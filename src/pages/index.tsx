@@ -1,6 +1,9 @@
-import Banner from '@/components/banner/Banner';
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import Banner from '@/components/banner/Banner';
+import { fetchTrendingCoins } from '@/helpers/api-utils';
+import type { NextPage } from 'next';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 
 const Home: NextPage = () => {
 	return (
@@ -16,6 +19,17 @@ const Home: NextPage = () => {
 			</main>
 		</div>
 	);
+};
+
+export const getStaticProps = async () => {
+	const queryClient = new QueryClient();
+	await queryClient.prefetchQuery('products', () => fetchTrendingCoins('IDR'));
+
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
 };
 
 export default Home;
