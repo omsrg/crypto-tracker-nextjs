@@ -46,3 +46,14 @@ export const fetchSingleCoin = async (id: string) => {
 export const useSingleCoin = (id: string) => {
 	return useQuery(['singleCoin', id], () => fetchSingleCoin(id));
 };
+
+export const fetchHistoricData = async (id: string, days: number, currency: CurrencyType) => {
+	const URL = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`;
+
+	const response = await fetch(URL);
+	if (!response.ok) {
+		throw new Error('Error Fetching Data!');
+	}
+
+	return await response.json();
+};

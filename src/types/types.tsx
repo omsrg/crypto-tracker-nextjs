@@ -38,3 +38,13 @@ export interface ICoin {
 	last_updated: Date;
 	price_change_percentage_24h_in_currency: number;
 }
+
+// export interface IHistoricData {
+// 	prices: Array<number[]>;
+// 	market_caps: Array<number[]>;
+// 	total_volumes: Array<number[]>;
+// }
+
+export interface IHistoricData {
+	prices: Array<number[]>;
+}
