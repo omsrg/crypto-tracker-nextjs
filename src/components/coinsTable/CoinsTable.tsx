@@ -29,8 +29,6 @@ const CoinsTable = () => {
 		);
 	};
 
-	console.log(data);
-
 	const useStyles = makeStyles(() => ({
 		row: {
 			backgroundColor: '#16171a',
@@ -134,7 +132,7 @@ const CoinsTable = () => {
 			</TableContainer>
 
 			<Pagination
-				count={(searchHandler()?.length / 10).toFixed(0)}
+				count={parseInt((searchHandler()?.length / 10).toFixed(0)) || 10}
 				sx={{ padding: 20, width: '100%', display: 'flex', justifyContent: 'center' }}
 				onChange={(_, value) => {
 					setPage(value);
