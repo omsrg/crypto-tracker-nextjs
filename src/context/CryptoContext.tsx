@@ -7,7 +7,7 @@ const CryptoContext = createContext<ContextType>({
 	changeCurrency: () => {},
 });
 
-export const CryptoState = () => {
+export const useCryptoState = () => {
 	return useContext(CryptoContext);
 };
 
