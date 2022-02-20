@@ -3,7 +3,7 @@ import { ICoin } from '@/types/types';
 import { useCryptoState } from '@/context/CryptoContext';
 import { fetchHistoricData } from '@/helpers/api-utils';
 import { useQuery } from 'react-query';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import { CircularProgress, Theme } from '@mui/material';
 import { Line } from 'react-chartjs-2';
 import SelectButton from '@/components/SelectButton';
@@ -28,9 +28,9 @@ const CoinDetail = ({ coin }: { coin: ICoin }) => {
 	const { data, isLoading, isFetching } = useQuery(['historicData', currency, days], () =>
 		fetchHistoricData(coin.id, days, currency)
 	);
-	console.log('result:', data);
 
 	const useStyles = makeStyles((theme: Theme) => ({
+		// createStyles({
 		container: {
 			width: '75%',
 			display: 'flex',
@@ -46,6 +46,7 @@ const CoinDetail = ({ coin }: { coin: ICoin }) => {
 				paddingTop: 0,
 			},
 		},
+		// }),
 	}));
 	const classes = useStyles();
 

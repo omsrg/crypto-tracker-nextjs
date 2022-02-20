@@ -31,8 +31,6 @@ const Carousel = () => {
 
 	const { data, isLoading, isError } = useTrendingCoins(currency);
 
-	console.log('render');
-
 	const classes = useStyles();
 
 	const items = data?.map((coin: ICoin) => {

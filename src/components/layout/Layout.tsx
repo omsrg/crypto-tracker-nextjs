@@ -4,15 +4,23 @@ import Header from './Header';
 import { createStyles, makeStyles } from '@mui/styles';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-	const useStyles = makeStyles(() =>
-		createStyles({
-			App: {
-				// backgroundColor: '#14161a',
-				color: 'white',
-				minHeight: '100vh',
-			},
-		})
-	);
+	// const useStyles = makeStyles(() =>
+	// 	createStyles({
+	// 		App: {
+	// 			// backgroundColor: '#14161a',
+	// 			color: 'white',
+	// 			minHeight: '100vh',
+	// 		},
+	// 	})
+	// );
+
+	const useStyles = makeStyles(() => ({
+		App: {
+			// backgroundColor: '#14161a',
+			color: 'white',
+			minHeight: '100vh',
+		},
+	}));
 
 	const classes = useStyles();
 

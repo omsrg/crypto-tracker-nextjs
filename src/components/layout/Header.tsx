@@ -23,8 +23,6 @@ const Header = () => {
 		changeCurrency(curr);
 	};
 
-	console.log(currency);
-
 	// const darkTheme = createTheme({
 	// 	palette: {
 	// 		primary: {
