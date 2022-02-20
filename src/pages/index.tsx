@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Banner from '@/components/banner/Banner';
-import { fetchTrendingCoins } from '@/helpers/api-utils';
+import { fetchCoinList } from '@/helpers/api-utils';
 import type { NextPage } from 'next';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
+import CoinsTable from '@/components/coinsTable/CoinsTable';
 
 const Home: NextPage = () => {
 	return (
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
 
 			<main className=''>
 				<Banner />
+				<CoinsTable />
 			</main>
 		</div>
 	);
@@ -23,7 +25,7 @@ const Home: NextPage = () => {
 
 export const getStaticProps = async () => {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery('products', () => fetchTrendingCoins('IDR'));
+	await queryClient.prefetchQuery('coinList', () => fetchCoinList('IDR'));
 
 	return {
 		props: {

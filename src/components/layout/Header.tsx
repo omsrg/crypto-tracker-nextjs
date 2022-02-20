@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { makeStyles } from '@mui/styles';
 import { AppBar, Container, Toolbar, Typography, Select, MenuItem } from '@mui/material';
-import { CryptoState } from '@/context/CryptoContext';
+import { useCryptoState } from '@/context/CryptoContext';
 import { CurrencyType } from '@/types/types';
 
 const useStyles = makeStyles(() => ({
@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 const Header = () => {
 	const classes = useStyles();
 
-	const { currency, changeCurrency } = CryptoState();
+	const { currency, changeCurrency } = useCryptoState();
 
 	const onChangeCurrency = (curr: CurrencyType) => {
 		changeCurrency(curr);
@@ -47,7 +47,7 @@ const Header = () => {
 
 					<Select
 						variant='outlined'
-						style={{
+						sx={{
 							width: 100,
 							height: 40,
 							marginRight: 15,
