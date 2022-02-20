@@ -1,7 +1,6 @@
 import { makeStyles } from '@mui/styles';
-import { fetchTrendingCoins } from '@/helpers/api-utils';
-import { CryptoState } from '@/context/CryptoContext';
-import { useQuery } from 'react-query';
+import { useTrendingCoins } from '@/helpers/api-utils';
+import { useCryptoState } from '@/context/CryptoContext';
 import AliceCarousel from 'react-alice-carousel';
 import { ICoin } from '@/types/types';
 import Link from 'next/link';
@@ -23,24 +22,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+export const numberWithComas = (val: string) => {
+	return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
 const Carousel = () => {
-	const { currency, symbol } = CryptoState();
+	const { currency, symbol } = useCryptoState();
 
-	// useEffect(() => {
+	const { data, isLoading, isError } = useTrendingCoins(currency);
 
-	// }, [currency])
-
-	const { data, isLoading, isError } = useQuery('trendingCoins', () =>
-		fetchTrendingCoins(currency)
-	);
-
-	console.log(data);
+	console.log('render');
 
 	const classes = useStyles();
-
-	const numberWithComas = (val: string) => {
-		return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-	};
 
 	const items = data?.map((coin: ICoin) => {
 		const profit = coin.price_change_percentage_24h >= 0;

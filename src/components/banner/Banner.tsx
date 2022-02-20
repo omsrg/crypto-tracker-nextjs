@@ -32,7 +32,7 @@ const Banner = () => {
 				<div className={classes.tagline}>
 					<Typography
 						variant='h2'
-						style={{
+						sx={{
 							fontWeight: 'bold',
 							marginBottom: 15,
 							fontFamily: 'Montserrat',
@@ -42,7 +42,7 @@ const Banner = () => {
 					</Typography>
 					<Typography
 						variant='subtitle2'
-						style={{
+						sx={{
 							color: 'darkgrey',
 							textTransform: 'capitalize',
 							fontFamily: 'Montserrat',
